@@ -6,6 +6,8 @@ const baseUrl = `https://${api}/${endpoint}`;
 
 // @ts-ignore
 const convertCurrency = (amount, from, to) => {
-    fetch(`${baseUrl}?amount=${amount}&from=${from}&to=${to}`)
+    return fetch(`${baseUrl}?amount=${amount}&from=${from}&to=${to}`)
         .then(res => res.json())
 }
+
+convertCurrency(100, 'USD', 'EUR').then(console.log)
