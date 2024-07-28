@@ -4,8 +4,29 @@ const api = 'api.frankfurter.app';
 const endpoint = 'latest';
 const baseUrl = `https://${api}/${endpoint}`;
 
+/*
+{ 
+    amount: 100, '
+    base: 'USD', 
+    date: '2024-07-26', 
+    rates: { 
+        EUR: 92.08 
+    } 
+}
+*/
 
-const convertCurrency = (amount:number, from:string, to:string): Promise<any> => {
+interface currencyResponse {
+    amount: number;
+    base: string;
+    date: string;
+    rates: {
+        [key: string]: number
+    }
+}
+
+type supportCurrency= "USD" | "JPY" | "EUR" | "THB"
+
+const convertCurrency = (amount:number, from:supportCurrency, to:supportCurrency): Promise<currencyResponse> => {
     return fetch(`${baseUrl}?amount=${amount}&from=${from}&to=${to}`)
         .then(res => res.json())
 }
@@ -13,6 +34,8 @@ const convertCurrency = (amount:number, from:string, to:string): Promise<any> =>
 const main = async () => {
     const data = await convertCurrency(100, 'USD', 'EUR');
     console.log(data)
+
+    console.log(data.rates.USD) //undefined ต้องมาตรวจอีกทีให้ Sync กับ Input
 }
 
 main();
