@@ -10,4 +10,9 @@ const convertCurrency = (amount:number, from:string, to:string): Promise<any> =>
         .then(res => res.json())
 }
 
-convertCurrency(100, 'USD', 'EUR').then(console.log)
+const main = async () => {
+    const data = await convertCurrency(100, 'USD', 'EUR');
+    console.log(data)
+}
+
+main();
