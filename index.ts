@@ -26,16 +26,20 @@ interface currencyResponse {
 
 type supportCurrency= "USD" | "JPY" | "EUR" | "THB"
 
-const convertCurrency = (amount:number, from:supportCurrency, to:supportCurrency): Promise<currencyResponse> => {
+const convertCurrency = ({
+            from,
+            to,
+            amount
+        }:{amount:number, from:supportCurrency, to:supportCurrency}): Promise<currencyResponse> => {
     return fetch(`${baseUrl}?amount=${amount}&from=${from}&to=${to}`)
         .then(res => res.json())
 }
 
 const main = async () => {
-    const data = await convertCurrency(100, 'USD', 'EUR');
+    const data = await convertCurrency({amount:100,from:'USD', to:'EUR'});
     console.log(data)
 
-    console.log(data.rates.USD) //undefined ต้องมาตรวจอีกทีให้ Sync กับ Input
+    //console.log(data.rates.USD) //undefined ต้องมาตรวจอีกทีให้ Sync กับ Input
 }
 
 main();
