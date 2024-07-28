@@ -4,8 +4,8 @@ const api = 'api.frankfurter.app';
 const endpoint = 'latest';
 const baseUrl = `https://${api}/${endpoint}`;
 
-// @ts-ignore
-const convertCurrency = (amount, from, to) => {
+
+const convertCurrency = (amount:number, from:string, to:string): Promise<any> => {
     return fetch(`${baseUrl}?amount=${amount}&from=${from}&to=${to}`)
         .then(res => res.json())
 }
